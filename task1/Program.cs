@@ -6,7 +6,7 @@ while (true)
 {
     if (int.TryParse(Console.ReadLine(), out var number))
     {
-        if (number is > 0 and <= 10000)
+        if (number is >= 0 and <= 10000)
         {
             Console.WriteLine($"Число {number} {(MathService.IsPrime(number) ? "простое!" : "не является простым")}");
             break;   
