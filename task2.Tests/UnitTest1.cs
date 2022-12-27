@@ -5,20 +5,22 @@ namespace task2.Tests;
 public class Tests
 {
     [Test]
-    public void YearIsLeapReturnsTrue()
+    [TestCase(2000)] // multiple of 400
+    [TestCase(1004)] // multiple of 4 but not 100
+    public void YearIsLeapReturnsTrue(int value)
     {
-        // multiple of 400
-        Assert.True(LeapYearService.IsLeapYear(2000));
-        // multiple of 4 but not 100
-        Assert.True(LeapYearService.IsLeapYear(1004));
+        var result = LeapYearService.IsLeapYear(value);
+        
+        Assert.That(DateTime.IsLeapYear(value), Is.EqualTo(result));
     }
 
     [Test]
-    public void YearIsNotLeapReturnsFalse()
+    [TestCase(2001)] // not multiple of 4
+    [TestCase(1900)] // multiple of 100 but not 400
+    public void YearIsNotLeapReturnsFalse(int value)
     {
-        // not multiple of 4
-        Assert.False(LeapYearService.IsLeapYear(2001));
-        // multiple of 100 but not 400
-        Assert.False(LeapYearService.IsLeapYear(1900));
+        var result = LeapYearService.IsLeapYear(value);
+        
+        Assert.That(DateTime.IsLeapYear(value), Is.EqualTo(result));
     }
 }

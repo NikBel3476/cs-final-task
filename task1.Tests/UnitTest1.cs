@@ -2,25 +2,32 @@ using task1;
 
 namespace task1.Tests;
 
+
 public class Tests
 {
     [Test]
-    public void NumberIsPrimeReturnsTrue()
+    [TestCase(5)]
+    [TestCase(11)]
+    [TestCase(239)]
+    [TestCase(5261)]
+    [TestCase(17569)]
+    public void NumberIsPrime_ReturnsTrue(int value)
     {
-        Assert.True(MathService.IsPrime(5));
-        Assert.True(MathService.IsPrime(11));
-        Assert.True(MathService.IsPrime(239));
-        Assert.True(MathService.IsPrime(5261));
-        Assert.True(MathService.IsPrime(17569));
+        var result = MathService.IsPrime(value);
+        
+        Assert.IsTrue(result, $"{value} должено быть простым числом");
     }
 
     [Test]
-    public void NumberIsNotPrimeReturnsFalse()
+    [TestCase(0)]
+    [TestCase(1)]
+    [TestCase(4)]
+    [TestCase(18)]
+    [TestCase(150)]
+    public void NumberIsNotPrime_ReturnsFalse(int value)
     {
-        Assert.False(MathService.IsPrime(0));
-        Assert.False(MathService.IsPrime(1));
-        Assert.False(MathService.IsPrime(4));
-        Assert.False(MathService.IsPrime(18));
-        Assert.False(MathService.IsPrime(150));
+        var result = MathService.IsPrime(value);
+        
+        Assert.IsFalse(result, $"{value} не должно быть простым числом");
     }
 }
